@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
   config.vm.box      = 'ubuntu/trusty64'
   config.vm.network :forwarded_port, guest: 5000, host: 5000,
                                      auto_correct: true
-  config.vm.network :private_network, ip: ip_address
+  config.vm.network :public_network, ip: ip_address
   config.vm.provision 'docker' do |d|
     d.pull_images 'registry'
     a = ' -v /vagrant/registry:/registry'\
