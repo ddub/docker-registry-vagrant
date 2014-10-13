@@ -12,7 +12,7 @@ IP_MATCHER = /^(?:#{IP_OCTET}\.){3}#{IP_OCTET}$/
 # Load the IP address config file to override the default
 if File.file?(IP_ADDRESS_FILE)
   File.open(IP_ADDRESS_FILE, 'r') do |file|
-    ip = file.gets.chomp!
+    ip = file.gets.chomp
     IP_MATCHER.match(ip) && ip_address = ip
   end
 end
@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
         ' -e STORAGE_PATH=/registry'\
         ' -e SEARCH_BACKEND=sqlalchemy'\
         ' -e SQLALCHEMY_INDEX_DATABASE=sqlite:////registry/docker-registry.db'\
-        ' -p #{ip_address}:5000:5000'
+        " -p #{ip_address}:5000:5000"
     d.run 'registry', args: a
   end
 end
